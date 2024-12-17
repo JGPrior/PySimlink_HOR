@@ -160,9 +160,14 @@ class Compiler:
         in a log file.
         """
         build_dir = os.path.join(self.model_paths.tmp_dir, "build")
+        
+        # set path for batch file that sends up command prompt with VS environ:
+        bat_path = "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\Tools\VsDevCmd.bat";
 
         with Popen(
-            [
+            [   
+                bat_path,
+                ";", # semi-colon ends command calling batch file.
                 os.path.join(cmake.CMAKE_BIN_DIR, "cmake"),
                 "-S",
                 self.model_paths.tmp_dir,
